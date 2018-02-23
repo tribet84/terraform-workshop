@@ -1,5 +1,4 @@
 # Introduction to Terraform
-
 Welcome to the introduction to Terraform workshop where we will be provisioning an azure service bus subscription
 
 # Pre-reqs
