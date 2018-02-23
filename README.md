@@ -1,6 +1,19 @@
-## Intro
+# Introduction to Terraform
 
-...
+Welcome to the introduction to Terraform workshop where we will be provisioning an azure service bus subscription
+
+# Pre-reqs
+
+### Install terraform
+
+```powershell
+# Install chocolatey
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+# install terraform
+choco install terraform
+```
+
 
 
 # Get down and dirty
