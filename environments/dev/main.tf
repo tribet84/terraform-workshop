@@ -27,12 +27,3 @@ module "namespace_workshop" {
 /* Here goes your topic */
 
 /* Here goes your subscription */
-
-/* Ignore for now ;)
-
- module "blueprint_buyers_remorse_dev" {
-   source                   = "../../../blueprints/workshop"
-   location                 = "NorthEurope"
-   orders_history_namespace = "dev-history-bus"
- }
-*/
