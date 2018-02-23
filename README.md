@@ -1,10 +1,9 @@
 # Introduction to Terraform
-
 Welcome to the introduction to Terraform workshop where we will be provisioning an azure service bus subscription
 
 # Pre-reqs
 
-### Install terraform
+Install terraform
 
 ```powershell
 # Install chocolatey
@@ -14,7 +13,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 choco install terraform
 ```
 
-
+To enhance your experience it helps to have vscode along with a few terraform extensions installed too
+```powershell
+choco install visualstudiocode
+code --install-extension mauve.terraform
+code --install-extension mindginative.terraform-snippets
+```
 
 # Get down and dirty
 
