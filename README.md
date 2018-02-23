@@ -68,10 +68,47 @@ Existing infrastructure **must** be imported into your tfstate to ensure that yo
 
 Not importing existing resources is dangerous and could cause unexpected behavior or even deletion of that resource!
 
+## Setting up the topic
+Now its time to really get down to business. There is already a topic called `workshop` in the namespace which we need to import. 
+
+To import you must first setup the resource in your configuration. Paste (or type if you are feeling ambitious) the following snippet into the dev environment main.tf
+
+```
+module "topic_workshop" {
+  source              = "../../modules/asb_topic"
+  topic_name          = "workshop"
+  resource_group_name = "${module.resourceGroup_workshop.resource_group_name}"
+  asb_namespace       = "${module.namespace_workshop.asb_namespace}"
+}
+```
+
+Take a closer look at asb_topic module and you find 
+- Variables - Used to configure and re-use a resource
+- The resource - Transformed into an api call by terraform
+- Output - Used to share variables and configuration between modules
+
+The eagle eyed of you will also notice that the topic configuration takes dependencies from both the resource group and namespace modules. This allows terraform to create an execution plan based on the dependencies
+
+```powershell
+terraform init #required to initialize the previously unused module
+terraform plan
+```
+
+The plan now shows that there is one new topic resource to add. This is still not correct as we know that the topic already exists and must be imported
+
 ## Terraform import
+To import the topic you need to map the configured modules address to the resource id which can be found in azure `terraform import ADDRESS ID`
 
+```powershell
+terraform import module.topic_workshop.azurerm_servicebus_topic.topic /subscriptions/d6f20e81-c8f9-4d3e-91ee-4ccf290b8e2b/resourceGroups/RG-Terraform-Workshop/providers/Microsoft.ServiceBus/namespaces/Terraform-Workshop/topics/workshop
+```
 
-But where is the topic?
+Run the plan again and there are no changes as infrastructure is up-to-date
+
+```powershell
+terraform plan
+```
+
 Import the topic
 Run plan again and see there are still no chanes to apply
 Create the subscription with your name
@@ -80,5 +117,7 @@ Run the apply - adds new sub
 Run the plan - no changes
 Modify the subscription - see how terraform applies incremental change
 Publish messages to the topic, whoever has the most wins
+Create a blueprint
+ -mv
 Bonus - Create and delete a subscription
 For users not able to access our secrets and service principle
