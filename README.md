@@ -71,7 +71,7 @@ Not importing existing resources is dangerous and could cause unexpected behavio
 ## Setting up the topic
 Now its time to really get down to business. There is already a topic called `workshop` in the namespace which we need to import. 
 
-To import you must first setup the resource in your configuration. Paste (or type if you are feeling ambitious) the following snippet into the dev environment main.tf
+To import you must first setup the resource in your configuration. Paste (or type if you are into that sort of thing) the following snippet into the dev environments main.tf
 
 ```
 module "topic_workshop" {
@@ -109,12 +109,41 @@ Run the plan again and there are no changes as infrastructure is up-to-date
 terraform plan
 ```
 
-Import the topic
-Run plan again and see there are still no chanes to apply
-Create the subscription with your name
-Run the plan - notice a new resource
-Run the apply - adds new sub
-Run the plan - no changes
+## Create a subscription
+Paste the following subscription resource into main.tf to configure a subscription. `Replace any reference of YOURNAME with your own`
+
+```
+module "subscription_YOURNAME" {
+  source              = "../../modules/asb_subscription"
+  subscription_name   = "YOURNAME"
+  resource_group_name = "${module.resourceGroup_workshop.resource_group_name}"
+  asb_namespace       = "${module.namespace_workshop.asb_namespace}"
+  topic_name          = "${module.topic_workshop.topic_name}"
+}
+```
+
+```powershell
+terraform init #required to initialize the previously unused module
+terraform plan
+```
+
+The plan will show there is a new resource to add. This time we want to apply the change.
+
+## Terraform apply
+Terraform apply will commit any changes detailed in the plan. Terraform will do whatever you tell it so be very careful and double check the changes you are about to apply.
+
+Additions are represented with a green +, changes a yellow ~ and deletions with a red -
+
+```powershell
+terraform apply
+```
+
+The apply will give you another final chance to check the changes. To confirm enter yes.
+
+If successful you will get this message `Apply complete! Resources: 1 added, 0 changed, 0 destroyed.`
+
+Running `terraform plan` again will confirm there are no changes and the plan was applied
+
 Modify the subscription - see how terraform applies incremental change
 Publish messages to the topic, whoever has the most wins
 Create a blueprint
