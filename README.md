@@ -1,7 +1,7 @@
 # Introduction to Terraform
 Welcome to the introduction to `Terraform` workshop where we will be introducing some basic concepts and provisioning an azure service bus subscription.
 
-![alt text](https://avatars3.githubusercontent.com/u/29154831?s=280&v=4 "Terraform")
+![alt text](https://cdn-images-1.medium.com/max/1920/1*b2YLIMmuRP4w0UmioQHAFA.png "Terraform")
 
 Brought to you by Jon Povey and Roberto Rabasco
 
@@ -164,3 +164,12 @@ Te remove a resource simply delete it from the configuration.
 Run `terraform plan` again and you will see that there is one resource to destroy.
 
 Run `terraform apply` and it will delete the subscription.
+
+# Running this outside of Asos Order Intake workshop
+To do this workshop outside of the Asos Order Intake workshop you will be required to create the resource group and namespace from scratch
+
+To do this:
+- Delete the terraform.tfstate file
+- [Setup an azure service principle](https://www.terraform.io/docs/providers/azurerm/authenticating_via_service_principal.html)
+- Update the dev main.tf file with your credentials
+- Run `terraform apply` and it will create both the resource group and namespace
