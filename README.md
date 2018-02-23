@@ -1,7 +1,7 @@
 # Introduction to Terraform
 Welcome to the introduction to `Terraform` workshop where we will be introducing some basic concepts and provisioning an azure service bus subscription.
 
-![alt text](https://cdn-images-1.medium.com/max/1920/1*b2YLIMmuRP4w0UmioQHAFA.png "Terraform")
+![terraformlogo](https://user-images.githubusercontent.com/15745924/36605763-9be4edd0-18b9-11e8-9508-789f416412aa.PNG)
 
 Brought to you by Jon Povey and Roberto Rabasco
 
