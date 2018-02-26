@@ -31,15 +31,13 @@ We start this journey with a requirement from the business for a new `Subscripti
 Follow the steps below and run the commands to change the way you provision infrastructure forever.
 
 ## Environments
-The entry point into each system to be provisioned can be found in environments. Here you will find that this 'dev' environment has already been partially configured with a provider and two modules.
+The entry point into each system to be provisioned can be found in the environments folder. Here you will find that this _dev_ environment has already been partially configured with a provider and two modules.
 
-A terraform `Provider` is responsible for communicating with cloud provider APIs e.g. Azure, AWS, Google etc.
+A terraform `Provider` is responsible for communicating with cloud providers APIs e.g. Azure, AWS, Google etc.
 
 `Modules` are configurable packages used to create resources with your provider.
 
-```
-To communicate with the environment we have set up, you will need to replace the secret for the provider. We have created an Azure Service Principle to achieve this.
-```
+_To communicate with the environment we have set up, you will need to replace the secret for the provider. We have created an Azure Service Principle to achieve this._
 
 ## Terraform init
 To start making changes to the environment you will first need to run the `terraform init` command. This will setup your working directory based on the environments configuration.
@@ -48,15 +46,15 @@ To start making changes to the environment you will first need to run the `terra
 cd .\environments\dev\
 terraform init
 ```
-After running these commands you will see each module is initialized in the terminal.
+After running these commands you should notice that each module is initialized in the terminal.
 
 ## Terraform plan
-The terraform plan command is used to create execution plans to determine what actions, if any, are required to achieve desired state
+The `terraform plan` command is used to create execution plans to determine what actions, if any, are required to achieve desired state
 
 ```powershell
 terraform plan
 ```
-Run the plan and you will see notice that the local state is refreshed and that there are `No changes. Infrastructure is up-to-date`
+Run the plan and you should see that the local state is refreshed and that there are `No changes. Infrastructure is up-to-date`
 
 ## Tfstate
 State is used by terraform to map real world resources to your configuration. In a production like environment this state would be stored remotely in a backend such as a blob container to allow for cross team collaboration.
@@ -82,7 +80,7 @@ module "topic_workshop" {
 }
 ```
 
-Take a closer look at asb_topic module and you find 
+Take a closer look at the asb_topic module and you will find 
 - Variables - Used to configure and re-use a resource
 - The resource - Transformed into an api call by terraform
 - Output - Used to share variables and configuration between modules
@@ -90,20 +88,20 @@ Take a closer look at asb_topic module and you find
 The eagle eyed of you will also notice that the topic configuration takes dependencies from both the resource group and namespace modules. This allows terraform to create an execution plan based on the dependencies.
 
 ```powershell
-terraform init #required to initialize the previously unused module
+terraform init #required to initialize the previously unused topic module
 terraform plan
 ```
 
-The plan now shows that there is one new topic resource to add. This is still not correct as we know that the topic already exists and must be imported.
+The plan should now show that there is one new topic resource to add. This is still not correct as we know that the topic already exists and must be imported.
 
 ## Terraform import
-To import the topic you need to map the configured modules address to the resource id which can be found in azure `terraform import ADDRESS ID`.
+To import the topic you need to map the configured modules address to the resource id which can be found in azure `terraform import ADDRESS RESOURCEID`.
 
 ```powershell
 terraform import module.topic_workshop.azurerm_servicebus_topic.topic /subscriptions/d6f20e81-c8f9-4d3e-91ee-4ccf290b8e2b/resourceGroups/RG-Terraform-Workshop/providers/Microsoft.ServiceBus/namespaces/Terraform-Workshop/topics/workshop
 ```
 
-Run the plan again and there are no changes as infrastructure is up-to-date.
+Run the plan again and you should see that there are no changes pending as infrastructure is up-to-date.
 
 ```powershell
 terraform plan
@@ -121,6 +119,7 @@ module "subscription_YOURNAME" {
   topic_name          = "${module.topic_workshop.topic_name}"
 }
 ```
+The subscription uses an output from the topic module to get the topic name
 
 ```powershell
 terraform init #required to initialize the previously unused module
@@ -130,7 +129,7 @@ terraform plan
 The plan will show there is a new resource to add. This time we want to apply the change.
 
 ## Terraform apply
-Terraform apply will commit any changes detailed in the plan. Terraform will do whatever you tell it so be very careful and double check the changes you are about to apply.
+`Terraform apply` will commit any changes detailed in the plan. Terraform will do whatever you tell it so be very careful and always double check the changes you are about to apply.
 
 Additions are represented with a green +, changes a yellow ~ and deletions with a red -
 
@@ -149,24 +148,24 @@ Navigate to the asb_subscription module and amend the max_delivery_count
 
 Run `terraform plan` again and you will see that a change is planned.
 
-Run `terraform apply` and it will modify the subscription without deletion.
+Run `terraform apply` and it will modify the subscription without deleting the current resource.
 
 ## Destructive changes
 Change the subscription name to your surname or something different in the dev main.tf
 
-Run `terraform plan` again and you will see that a change is planned. But this time one resource will be destroyed and one created because this changes forces a new resource.
+Run `terraform plan` again and you will see that a change is planned. But this time one resource will be destroyed and one created because this particular change forces a new resource.
 
 Run `terraform apply` and it will recreate the subscription.
 
-## Bonus - Deleting a resource
-Te remove a resource simply delete it from the configuration.
+## Deleting a resource
+Te remove a resource simply delete it from the configuration. _For this worksop only delete what you have created_
 
 Run `terraform plan` again and you will see that there is one resource to destroy.
 
 Run `terraform apply` and it will delete the subscription.
 
 # Running this outside of Asos Order Intake workshop
-To do this workshop outside of the Asos Order Intake workshop you will be required to create the resource group and namespace from scratch
+To run this tutorial outside of the Asos Order Intake workshop you will be required to create the resource group and namespace from scratch
 
 To do this:
 - Delete the terraform.tfstate file
