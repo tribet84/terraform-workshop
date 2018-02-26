@@ -30,7 +30,7 @@ code --install-extension mindginative.terraform-snippets
 ## Setting the scene
 We start this journey with a requirement from the business for a new `Subscription` under an existing `Topic` in Azure Service Bus. The resource group, namespace and topic already exist.
 
-Follow the steps below and run the commands to change the way you provision infrastructure forever.
+Follow the steps below and run the commands to change the way you provision infrastructure forever!
 
 ## Environments
 The entry point into each system to be provisioned can be found in the environments folder. Here you will find that this _dev_ environment has already been partially configured with a provider and two modules.
