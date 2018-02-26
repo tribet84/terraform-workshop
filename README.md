@@ -81,7 +81,7 @@ module "topic_workshop" {
 ```
 
 Take a closer look at the asb_topic module and you will find 
-- Variables - Used to configure and re-use a resource
+- Variables - Values passed into the module to configure a resource
 - The resource - Transformed into an api call by terraform
 - Output - Used to share variables and configuration between modules
 
