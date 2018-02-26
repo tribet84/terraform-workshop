@@ -158,7 +158,7 @@ Run `terraform plan` again and you will see that a change is planned. But this t
 Run `terraform apply` and it will recreate the subscription.
 
 ## Deleting a resource
-Te remove a resource simply delete it from the configuration. _For this worksop only delete what you have created_
+Te remove a resource simply delete it from the configuration. _For this workshop only delete what you have created_
 
 Run `terraform plan` again and you will see that there is one resource to destroy.
 
