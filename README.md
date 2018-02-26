@@ -157,6 +157,13 @@ Run `terraform plan` again and you will see that there is one resource to destro
 
 Run `terraform apply` and it will delete the subscription.
 
+## Bonus - Adding a new module
+A late requirement has come in and a new queue using your name is also required (why are these product managers always changing their minds?).
+
+Create a new module for a queue and then add the resource configuration to the plan. Once you are ready plan and apply your changes.
+
+The terraform azure provider [documentation](https://www.terraform.io/docs/providers/azurerm/r/servicebus_queue.html) will probably come in handy here. 
+
 # Running this outside of Asos Order Intake workshop
 To run this tutorial outside of the Asos Order Intake workshop you will be required to create the resource group and namespace from scratch
 
