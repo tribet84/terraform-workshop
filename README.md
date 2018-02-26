@@ -109,29 +109,20 @@ Run the plan again and you should see that there are no changes pending as infra
 terraform plan
 ```
 
-## Create a subscription
-Paste the following subscription resource into main.tf to configure a subscription. `Replace any reference of YOURNAME with your own`
+## Creating a subscription
+A subscription is required under the `workshop` topic. Create a subscription using the existing asb_subscription with your name as the subscription name.
 
-```
-module "subscription_YOURNAME" {
-  source              = "../../modules/asb_subscription"
-  subscription_name   = "YOURNAME"
-  resource_group_name = "${module.resourceGroup_workshop.resource_group_name}"
-  asb_namespace       = "${module.namespace_workshop.asb_namespace}"
-  topic_name          = "${module.topic_workshop.topic_name}"
-}
-```
-The subscription uses an output from the topic module to get the topic name
+Remember to use the outputs from other modules to setup the dependencies correctly. Once the configuration is complete run the following commands.
 
 ```powershell
 terraform init #required to initialize the previously unused module
 terraform plan
 ```
 
-The plan will show there is a new resource to add. This time we want to apply the change.
+The plan should show there is a new subscription resource to add.
 
 ## Terraform apply
-`Terraform apply` will commit any changes detailed in the plan. Terraform will do whatever you tell it so be very careful and always double check the changes you are about to apply.
+This time we want to apply the change as we know the subscription is a new resource. `Terraform apply` will commit any changes detailed in the plan. Terraform will do whatever you tell it so be very careful and always double check the changes you are about to apply before running the command.
 
 Additions are represented with a green +, changes a yellow ~ and deletions with a red -
 
@@ -153,7 +144,7 @@ Run `terraform plan` again and you will see that a change is planned.
 Run `terraform apply` and it will modify the subscription without deleting the current resource.
 
 ## Destructive changes
-Change the subscription name to your surname or something different in the dev main.tf
+Change the subscription name to _yourname_date_ in the dev plan.
 
 Run `terraform plan` again and you will see that a change is planned. But this time one resource will be destroyed and one created because this particular change forces a new resource.
 
