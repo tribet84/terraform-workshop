@@ -3,8 +3,10 @@ Welcome to the introduction to `Terraform` workshop where we will be introducing
 
 ![terraformlogo](https://user-images.githubusercontent.com/15745924/36605763-9be4edd0-18b9-11e8-9508-789f416412aa.PNG)
 
-Brought to you by [Jon Povey](https://github.com/jpovey) and [Roberto Rabasco](https://github.com/tribet84)
-
+Brought to you by [Jon Povey](https://github.com/jpovey)
+ ![jon](https://avatars0.githubusercontent.com/u/15745924?s=76&v=4) and [Roberto Rabasco](https://github.com/tribet84) 
+ ![roberto](https://avatars2.githubusercontent.com/u/10653977?s=76&v=4)
+ 
 # Pre-reqs
 
 Install terraform
