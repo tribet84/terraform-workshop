@@ -3,7 +3,7 @@ Welcome to the introduction to `Terraform` workshop where we will be introducing
 
 ![terraformlogo](https://user-images.githubusercontent.com/15745924/36605763-9be4edd0-18b9-11e8-9508-789f416412aa.PNG)
 
-Brought to you by Jon Povey and Roberto Rabasco
+Brought to you by [Jon Povey](https://github.com/jpovey) and [Roberto Rabasco](https://github.com/tribet84)
 
 # Pre-reqs
 
